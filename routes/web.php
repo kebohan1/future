@@ -14,11 +14,8 @@
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
-// $router->get('gps','GPSController@getGPS');
-$router->get('gps',function(){
-	echo '123';
-});
-$router->post('gps','GPSController@writeGPS');
+$router->get('gps','GPSController@getGPS');
+// $router->post('gps','GPSController@writeGPS');
 // $router->group(['prefix'=>'user'],function() use ($router){
 // 	$router->post('new','UserController@new_user');
 // 	$router->post('update_password','GPSController@update_user_password');
