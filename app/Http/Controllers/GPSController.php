@@ -15,7 +15,7 @@ class GPSController extends Controller
     }
     public function get(Request $request)
     {
-        var_dump(DB::table('apitoken')->where('token' ,'=',$request->token)->where('active','=','true')->get());
+        var_dump(DB::table('apitoken')->where('token' ,'=',$request->token)->where('active','=','1')->get());
         // if (DB::select('select * from api_token where token = ? and active = true', [$request->token])==null) {
         //     // return response()->json(['data_status'=>'forbidden:token error']);
         // }
