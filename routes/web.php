@@ -14,5 +14,5 @@
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
-$router->get('gps',['as'=>'gps','uses'=>'GPSController@getGPS']);
-$router->post('gps',['as'=>'gps','uses'=>'GPSController@writeGPS']);
+$router->get('gps','GPSController@getGPS');
+$router->post('gps','GPSController@writeGPS');
