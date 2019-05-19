@@ -15,41 +15,33 @@ class GPSController extends Controller
     {
         //
     }
-    public function get(Request $request)
-    {
-        $apitoken = DB::select('select * from apitoken where token = ? and active = true', [$request->token]);
-        var_dump($apitoken);
-        // if (DB::select('select * from api_token where token = ? and active = true', [$request->token])==null) {
-        //     // return response()->json(['data_status'=>'forbidden:token error']);
-        // }
+
+    public function get(Request $response){
+        var_dump($response);
+        echo '123';
+        if (DB::select('select * from api_token where token = ? and active = true', [$response->token])==null) {
+            return response()->json(['data_status'=>'forbidden:token error']);
+        }
+        if(DB::select('select * from users where id = ? and password = ?',[$response->uid,Hash::make($response->password)])!=null){
+            return response()->json(['data_status'=>'forbidden:auth error']);
+        } else {
+            $gps_data=DB::select('select * from gps where uid = ? order by timestamps DESC limit 6', [$response->uid]);
+            return response()->json(['data_status'=>'success','data'=>$gps_data->toJson()]);
+        }
     }
-    // public function get(){
-    //     var_dump($response);
-    //     echo '123';
-    //     // if (DB::select('select * from api_token where token = ? and active = true', [$response->token])==null) {
-    //     //     return response()->json(['data_status'=>'forbidden:token error']);
-    //     // }
-    //     // if(DB::select('select * from users where id = ? and password = ?',[$response->uid,Hash::make($response->password)])!=null){
-    //     //     return response()->json(['data_status'=>'forbidden:auth error']);
-    //     // } else {
-    //     //     $gps_data=DB::select('select * from gps where uid = ? order by timestamps DESC limit 6', [$response->uid]);
-    //     //     return response()->json(['data_status'=>'success','data'=>$gps_data->toJson()]);
-    //     // }Request $response
-    // }
 
-    // public function writeGPS(Request $response){
-    //     var_dump($response);
-    //     return 123;
-    //     // if (DB::select('select * from api_token where token = ? and active = true', [$response->token])==null) {
-    //     //     return response()->json(['data_status'=>'forbidden:token error']);
-    //     // }
-    //     // if(DB::select('select * from users where id = ? and password = ?',[$response->uid,Hash::make($response->password)])!=null){
-    //     //     return response()->json(['data_status'=>'forbidden:auth error']);
-    //     // } else {
-    //     //     $gps_data=DB::insert('insert into gps (longitude, latitude, uid) values (?, ?, ?)', [$response->longitude, $response->latitude, $response->uid]);
-    //     //     return response()->json(['data_status'=>'success']);
-    //     // }
-    // }
+    public function writeGPS(Request $response){
 
-    //
+        if (DB::select('select * from api_token where token = ? and active = true', [$response->token])==null) {
+            return response()->json(['data_status'=>'forbidden:token error']);
+        }
+        if(DB::select('select * from users where id = ? and password = ?',[$response->uid,Hash::make($response->password)])!=null){
+            return response()->json(['data_status'=>'forbidden:auth error']);
+        } else {
+            $gps_data=DB::insert('insert into gps (longitude, latitude, uid) values (?, ?, ?)', [$response->longitude, $response->latitude, $response->uid]);
+            return response()->json(['data_status'=>'success']);
+        }
+    }
+
+    
 }
