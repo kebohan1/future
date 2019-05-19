@@ -14,7 +14,10 @@
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
-$router->get('gps','GPSController@getGPS');
+// $router->get('gps','GPSController@getGPS');
+$router->get('gps',function(){
+	return 123;
+})
 $router->post('gps','GPSController@writeGPS');
 // $router->group(['prefix'=>'user'],function() use ($router){
 // 	$router->post('new','UserController@new_user');
