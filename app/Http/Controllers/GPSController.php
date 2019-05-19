@@ -15,7 +15,7 @@ class GPSController extends Controller
     }
     public function get(Request $request)
     {
-        echo '123';
+        var_dump($request);
     }
     // public function get(){
     //     var_dump($response);
