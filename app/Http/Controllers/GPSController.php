@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
+use App\Apitoken;
 class GPSController extends Controller
 {
     /**
@@ -16,7 +17,7 @@ class GPSController extends Controller
     }
     public function get(Request $request)
     {
-        $apitoken = app('db')->select("SELECT * FROM apitoken");
+        $apitoken = Apitoken::all();
         var_dump($api_token);
         // if (DB::select('select * from api_token where token = ? and active = true', [$request->token])==null) {
         //     // return response()->json(['data_status'=>'forbidden:token error']);
