@@ -17,8 +17,8 @@ class GPSController extends Controller
     }
     public function get(Request $request)
     {
-        $apitoken = Apitoken::all();
-        var_dump($api_token);
+        // $apitoken = Apitoken::all();
+        var_dump($request);
         // if (DB::select('select * from api_token where token = ? and active = true', [$request->token])==null) {
         //     // return response()->json(['data_status'=>'forbidden:token error']);
         // }
