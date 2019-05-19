@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Http\Request;
 class GPSController extends Controller
 {
     /**
@@ -13,7 +13,7 @@ class GPSController extends Controller
     {
         //
     }
-    public function get()
+    public function get(Request $request)
     {
         echo '123';
     }
