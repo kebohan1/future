@@ -15,6 +15,7 @@ class GPSController extends Controller
     }
 
     public function getGPS($response){
+
         if (DB::select('select * from api_token where token = ? and active = true', [$response->token])==null) {
             return response()->json(['data_status'=>'forbidden:token error'])
         }
@@ -27,6 +28,7 @@ class GPSController extends Controller
     }
 
     public function writeGPS($response){
+        var_dump($response);
         if (DB::select('select * from api_token where token = ? and active = true', [$response->token])==null) {
             return response()->json(['data_status'=>'forbidden:token error'])
         }
