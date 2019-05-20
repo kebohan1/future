@@ -1,6 +1,6 @@
 # Future API
 
-### GET /gps
+> ### GET /gps
 #### request
 ##### HTTP method:GET
 ##### parameters
