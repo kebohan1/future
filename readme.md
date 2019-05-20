@@ -1,3 +1,4 @@
 #Future API
 
-> #GET /gps
+> ## GET /gps
+> ### request
