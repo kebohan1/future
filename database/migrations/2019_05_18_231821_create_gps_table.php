@@ -15,8 +15,8 @@ class CreateGpsTable extends Migration
     {
         Schema::create('gps', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->float('longitude');//經度
-            $table->float('latitude');//緯度
+            $table->float('longitude',9,6);//經度
+            $table->float('latitude',8,6);//緯度
             $table->unsignedInteger('uid');
             $table->timestamps();
         });

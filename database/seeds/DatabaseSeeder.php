@@ -14,10 +14,10 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // $this->call('UsersTableSeeder');
-        // DB::table('users')->insert([
-        // 	'id' => '111111111',
-        // 	'password' => Hash::make('secret')
-        // ]);
+        DB::table('users')->insert([
+        	'id' => '111111111',
+        	'password' => Hash::make('secret')
+        ]);
 
         DB::table('apitoken')->insert([
         	'token' => Str::random(20),
