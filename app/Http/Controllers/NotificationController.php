@@ -1,9 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Contracts\Routing\ResponseFactory;
-use DB;
 use Illuminate\Http\Request;
+use DB;
+use App\Apitoken;
+use Illuminate\Support\Facades\Hash;
 class NotificationController extends Controller
 {
     /**
