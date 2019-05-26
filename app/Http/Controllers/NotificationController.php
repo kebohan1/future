@@ -20,11 +20,11 @@ class NotificationController extends Controller
     public function new(Request $response){
         // echo "123";
         // var_dump($response);
-        if(!(isset($response->name) and isset($response->alarm_time) and isset($response->monday_switch)and isset($response->tuesday_switch) and isset($response->wednesday_switch) and isset($response->thursday_switch) and isset($response->friday_switch) and isset($response->saturday_switch) and isset($response->sunday_switch) and isset($response->active) and isset($response->uid))){
+        if(!(isset($response->name) and isset($response->alarm_time) and isset($response->monday_switch)and isset($response->tuesday_switch) and isset($response->wednesday_switch) and isset($response->thursday_switch) and isset($response->friday_switch) and isset($response->saturday_switch) and isset($response->sunday_switch) and isset($response->uid))){
             return response()->json(['data_status'=>'some_parameter_is_null'],200);
         } else{
         var_dump($response);
-                        
+
         }
 
         // if (sizeof(DB::table('apitoken')->where('token','=',$response->token)->where('active','=','1')->get())==0) {
