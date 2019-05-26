@@ -31,7 +31,7 @@ class NotificationController extends Controller
         var_dump(Hash::check($response->password,$user[0]->password));
 
 
-        if(!Hash::check($response->password,$user[0]->password)||isset($user)){
+        if(!Hash::check($response->password,$user[0]->password)||!isset($user)){
             return response()->json(['data_status'=>'forbidden:auth error'],403);
         } else {
             DB::table('notification')->insert([
