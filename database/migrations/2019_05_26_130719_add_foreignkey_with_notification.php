@@ -13,7 +13,9 @@ class AddForeignkeyWithNotification extends Migration
      */
     public function up()
     {
-        //
+        Schema::table('notification',function($table){
+            $table->foreign('uid')->references('id')->on('users');
+        });
     }
 
     /**
@@ -24,5 +26,8 @@ class AddForeignkeyWithNotification extends Migration
     public function down()
     {
         //
+        Schema::drop('notification',function($table){
+            $table->foreign('uid')->drop();
+        });
     }
 }
