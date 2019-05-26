@@ -16,9 +16,9 @@ $router->get('/', function () use ($router) {
 });
 $router->get('gps','GPSController@get');
 $router->post('gps','GPSController@writeGPS');
-$router->group(['prefix'=>'notify'],function() use ($router){
-	$router->post('new','NotificationCotroller@new_notification');
-})
+// $router->group(['prefix'=>'notify'],function() use ($router){
+// 	$router->post('new','NotificationCotroller@new_notification');
+// })
 // $router->group(['prefix'=>'user'],function() use ($router){
 // 	$router->post('new','UserController@new_user');
 // 	$router->post('update_password','GPSController@update_user_password');
