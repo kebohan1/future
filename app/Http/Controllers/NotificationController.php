@@ -18,18 +18,16 @@ class NotificationController extends Controller
     }
 
     public function new(Request $response){
-        // echo "123";
-        // var_dump($response);
-        if(!(isset($response->name) and isset($response->alarm_time) and isset($response->monday_switch)and isset($response->tuesday_switch) and isset($response->wednesday_switch) and isset($response->thursday_switch) and isset($response->friday_switch) and isset($response->saturday_switch) and isset($response->sunday_switch) and isset($response->uid))){
+
+        if(!(isset($response->name) and isset($response->alarm_time) and isset($response->monday_switch)and isset($response->tuesday_switch) and isset($response->wednesday_switch) and isset($response->thursday_switch) and isset($response->friday_switch) and isset($response->saturday_switch) and isset($response->sunday_switch) and isset($response->uid) and isset($response->token))){
             return response()->json(['data_status'=>'some_parameter_is_null'],404);
         } 
 
         if (sizeof(DB::table('apitoken')->where('token','=',$response->token)->where('active','=','1')->get())==0) {
             return response()->json(['data_status'=>'forbidden:token error'],401);
         }
-        $user = DB::table('users')->where('id','=',$response->uid)->get();
-        var_dump(Hash::check($response->password,$user[0]->password));
 
+        $user = DB::table('users')->where('id','=',$response->uid)->get();
 
         if(!Hash::check($response->password,$user[0]->password)||!isset($user)){
             return response()->json(['data_status'=>'forbidden:auth error'],403);
@@ -46,12 +44,32 @@ class NotificationController extends Controller
             $new_notify->sunday_switch = $response->sunday_switch;
             $new_notify->uid = $response->uid;
             $new_notify->active = '1';
-
             $new_notify->save();
-
             return response()->json(['data_status'=>'success'],200);
-
-            
         }
+
+    }
+
+    public function get(Request $response){
+        if(!(isset($response->uid) and isset($response->password) and isset($response->token))){
+            return response()->json(['data_status'=>'some_parameter_is_null'],404);
+        } 
+
+        if (sizeof(DB::table('apitoken')->where('token','=',$response->token)->where('active','=','1')->get())==0) {
+            return response()->json(['data_status'=>'forbidden:token error'],401);
+        }
+
+        $user = DB::table('users')->where('id','=',$response->uid)->get();
+
+        if(!Hash::check($response->password,$user[0]->password)||!isset($user)){
+            return response()->json(['data_status'=>'forbidden:auth error'],403);
+        } else {
+            $new_notify = Notify::where('uid',$response->uid)
+                                ->orderBy('time','asc')
+                                ->get();
+
+            return $new_notify->toJson();
+        }
+
     }
 }
