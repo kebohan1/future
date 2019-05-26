@@ -31,27 +31,27 @@ class NotificationController extends Controller
         var_dump(Hash::check($response->password,$user[0]->password));
 
 
-        // if(!Hash::check($response->password,$user[0]->password)||isset($user)){
-        //     return response()->json(['data_status'=>'forbidden:auth error'],403);
-        // } else {
-        //     DB::table('notification')->insert([
+        if(!Hash::check($response->password,$user[0]->password)||isset($user)){
+            return response()->json(['data_status'=>'forbidden:auth error'],403);
+        } else {
+            DB::table('notification')->insert([
             
-        //         'name' => $response->name, 
-        //         'alarm_time' => $response->alarm_time,
-        //         'monday_switch' => $response->monday_switch,
-        //         'tuesday_switch' => $response->tuesday_switch,
-        //         'wednesday_switch' => $response->wednesday_switch,
-        //         'thursday_switch' => $response->thursday_switch,
-        //         'friday_switch' => $response->friday_switch,
-        //         'saturday_switch' => $response->saturday_switch,
-        //         'sunday_switch' => $response->sunday_switch,
-        //         'active' => '1',
-        //         'uid' =>$response->uid
+                'name' => $response->name, 
+                'alarm_time' => $response->alarm_time,
+                'monday_switch' => $response->monday_switch,
+                'tuesday_switch' => $response->tuesday_switch,
+                'wednesday_switch' => $response->wednesday_switch,
+                'thursday_switch' => $response->thursday_switch,
+                'friday_switch' => $response->friday_switch,
+                'saturday_switch' => $response->saturday_switch,
+                'sunday_switch' => $response->sunday_switch,
+                'active' => '1',
+                'uid' =>$response->uid
 
-        //     ])
-        //     return response()->json(['data_status'=>'success'],200);
+            ]);
+            return response()->json(['data_status'=>'success'],200);
 
             
-        // }
+        }
     }
 }
