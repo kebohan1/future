@@ -16,6 +16,7 @@ $router->get('/', function () use ($router) {
 });
 $router->get('gps','GPSController@get');
 $router->post('gps','GPSController@writeGPS');
+$router->post('notify/new','NotificationCotroller@new_notification');
 // $router->group(['prefix'=>'notify'],function() use ($router){
 // 	$router->post('new','NotificationCotroller@new_notification');
 // })
