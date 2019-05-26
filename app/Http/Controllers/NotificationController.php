@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
-use App\Apitoken;
 use Illuminate\Support\Facades\Hash;
+use App\Notify;
 class NotificationController extends Controller
 {
     /**
@@ -34,21 +34,21 @@ class NotificationController extends Controller
         if(!Hash::check($response->password,$user[0]->password)||!isset($user)){
             return response()->json(['data_status'=>'forbidden:auth error'],403);
         } else {
-            DB::table('notification')->insert([
-            
-                'name' => $response->name, 
-                'alarm_time' => $response->alarm_time,
-                'monday_switch' => $response->monday_switch,
-                'tuesday_switch' => $response->tuesday_switch,
-                'wednesday_switch' => $response->wednesday_switch,
-                'thursday_switch' => $response->thursday_switch,
-                'friday_switch' => $response->friday_switch,
-                'saturday_switch' => $response->saturday_switch,
-                'sunday_switch' => $response->sunday_switch,
-                'active' => '1',
-                'uid' =>$response->uid
+            $new_notify = new Notify;
+            $new_notify->name = $response->name;
+            $new_notify->alarm_time = $response->alarm_time;
+            $new_notify->monday_switch = $response->monday_switch;
+            $new_notify->tuesday_switch = $response->tuesday_switch;
+            $new_notify->wednesday_switch = $response->wednesday_switch;
+            $new_notify->thursday_switch = $response->thursday_switch;
+            $new_notify->friday_switch = $response->friday_switch;
+            $new_notify->saturday_switch = $response->saturday_switch;
+            $new_notify->sunday_switch = $response->sunday_switch;
+            $new_notify->uid = $response->uid;
+            $new_notify->active = '1';
 
-            ]);
+            $new_notify->save();
+
             return response()->json(['data_status'=>'success'],200);
 
             
