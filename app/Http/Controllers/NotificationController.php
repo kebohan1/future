@@ -64,9 +64,7 @@ class NotificationController extends Controller
         if(!Hash::check($response->password,$user[0]->password)||!isset($user)){
             return response()->json(['data_status'=>'forbidden:auth error'],403);
         } else {
-            $new_notify = Notify::where('uid',$response->uid)
-                                ->orderBy('time','asc')
-                                ->get();
+            $new_notify = Notify::where('uid',$response->uid)->orderBy('alarm_time','asc')->get();
             var_dump($new_notify);
             // return $new_notify->toJson();
         }
