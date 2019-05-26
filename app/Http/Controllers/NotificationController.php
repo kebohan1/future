@@ -67,8 +67,8 @@ class NotificationController extends Controller
             $new_notify = Notify::where('uid',$response->uid)
                                 ->orderBy('time','asc')
                                 ->get();
-
-            return $new_notify->toJson();
+            var_dump($new_notify);
+            // return $new_notify->toJson();
         }
 
     }
