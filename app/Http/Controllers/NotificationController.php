@@ -17,7 +17,7 @@ class NotificationController extends Controller
         //
     }
 
-    public function new_notification(Request $response){
+    public function new(Request $response){
         var_dump($response);
         // if(!(isset($response->name) and isset($response->alarm_time) and isset($response->monday_switch)and isset($response->tuesday_switch) and isset($response->wednesday_switch) and isset($response->thursday_switch) and isset($response->friday_switch) and isset($response->saturday_switch) and isset($response->sunday_switch) and isset($response->active) and isset($response->uid))){
         //     return response()->json(['data_status'=>'some_parameter_is_null'],200);
@@ -52,31 +52,4 @@ class NotificationController extends Controller
             
         // }
     }
-    // public function new_user($response){
-    //     if(DB::select('select * from users where id = ?',[$response->uid])!=null){
-    //         return response()->json(['user_status'=>'exists']);
-    //     } else {
-    //         DB::insert('insert into users (id, name, password) values (?, ?, ?)', [$response->uid, $response->name,Hash::make($repsone->password)]);
-    //         return response()->json(['user_status'=>'success']);
-    //     }
-    // }
-
-    // public function update_user_password($response){
-    //     if(DB::select('select * from users where id = ?',[$response->uid])==null){
-    //         return response()->json(['user_status'=>'error']);
-    //     } else {
-    //         DB::update('update users set password = ? where id = ?',[$response->password,$response->uid]);
-    //         return response()->json(['user_status'=>'success']);
-    //     }
-    // }
-
-    // public function update_user_name($response){
-    //     if(DB::select('select * from users where id = ?',[$response->uid])==null){
-    //         return response()->json(['user_status'=>'error']);
-    //     } else {
-    //         DB::update('update users set name = ? where id = ?',[$response->name,$response->uid]);
-    //         return response()->json(['user_status'=>'success']);
-    //     }
-    // }
-    //
 }
