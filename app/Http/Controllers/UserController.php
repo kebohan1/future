@@ -26,11 +26,12 @@ class UserController extends Controller
         } else {
             $user = new User;
             $user->id=$response->uid;
-            echo $response->has('name');
-            // if($request->has('name')){
-            //     $user->name=$response->name;
-            // }
+            // echo $response->has('name');
+            if($response->has('name')){
+                $user->name=$response->name;
+            }
             $user->password = Hash::make($response->password);
+            $user->save();
             return response()->json(['user_status'=>'success']);
         }
     }
