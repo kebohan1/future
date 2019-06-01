@@ -36,14 +36,38 @@ class UserController extends Controller
         }
     }
 
-    // public function update_user_password(Request $response){
-    //     if(DB::select('select * from users where id = ?',[$response->uid])==null){
-    //         return response()->json(['user_status'=>'error']);
-    //     } else {
-    //         DB::update('update users set password = ? where id = ?',[$response->password,$response->uid]);
-    //         return response()->json(['user_status'=>'success']);
-    //     }
-    // }
+    public function update_user_password(Request $response){
+        if ($response->has('uid') and $response->has('old_password') and $response->has('new_password')) {
+            abort(404)
+        }
+        $modify_user = User::where('id','=',$response->uid)->first();
+        if(empty($modify_user) and Hash::check($response->old_password, $modify_user->password)==false ) {
+            abort(403)
+        } else {
+            echo "check";
+            // $user = User::where('id','=',$response->uid);
+            // $user->id=$response->uid;
+            // // echo $response->has('name');
+            // if($response->has('name')){
+            //     $user->name=$response->name;
+            // }
+            // $user->password = Hash::make($response->password);
+            // $user->save();
+            // return response()->json(['user_status'=>'success']);
+        }
+
+
+
+
+
+
+        // if(DB::select('select * from users where id = ?',[$response->uid])==null){
+        //     return response()->json(['user_status'=>'error']);
+        // } else {
+        //     DB::update('update users set password = ? where id = ?',[$response->password,$response->uid]);
+        //     return response()->json(['user_status'=>'success']);
+        // }
+    }
 
     // public function update_user_name(Request $response){
     //     if(DB::select('select * from users where id = ?',[$response->uid])==null){
