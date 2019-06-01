@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use DB;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use App\User;
 class UserController extends Controller
 {
     /**
@@ -15,31 +18,36 @@ class UserController extends Controller
         //
     }
 
-    public function new_user($response){
-        if(DB::select('select * from users where id = ?',[$response->uid])!=null){
+    public function new_user(Request $response){
+        if(User::where('id','=',$response->uid))!=null){
             return response()->json(['user_status'=>'exists']);
         } else {
-            DB::insert('insert into users (id, name, password) values (?, ?, ?)', [$response->uid, $response->name,Hash::make($repsone->password)]);
+            $user = new User;
+            $user->id=$response->uid;
+            if($request->has('name')){
+                $user->name=$response->name;
+            }
+            $user->password = Hash::make($response->password);
             return response()->json(['user_status'=>'success']);
         }
     }
 
-    public function update_user_password($response){
-        if(DB::select('select * from users where id = ?',[$response->uid])==null){
-            return response()->json(['user_status'=>'error']);
-        } else {
-            DB::update('update users set password = ? where id = ?',[$response->password,$response->uid]);
-            return response()->json(['user_status'=>'success']);
-        }
-    }
+    // public function update_user_password(Request $response){
+    //     if(DB::select('select * from users where id = ?',[$response->uid])==null){
+    //         return response()->json(['user_status'=>'error']);
+    //     } else {
+    //         DB::update('update users set password = ? where id = ?',[$response->password,$response->uid]);
+    //         return response()->json(['user_status'=>'success']);
+    //     }
+    // }
 
-    public function update_user_name($response){
-        if(DB::select('select * from users where id = ?',[$response->uid])==null){
-            return response()->json(['user_status'=>'error']);
-        } else {
-            DB::update('update users set name = ? where id = ?',[$response->name,$response->uid]);
-            return response()->json(['user_status'=>'success']);
-        }
-    }
+    // public function update_user_name(Request $response){
+    //     if(DB::select('select * from users where id = ?',[$response->uid])==null){
+    //         return response()->json(['user_status'=>'error']);
+    //     } else {
+    //         DB::update('update users set name = ? where id = ?',[$response->name,$response->uid]);
+    //         return response()->json(['user_status'=>'success']);
+    //     }
+    // }
     //
 }
