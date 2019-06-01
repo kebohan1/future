@@ -20,18 +20,20 @@ class UserController extends Controller
 
     public function new_user(Request $response){
         // echo $response;
-        if(User::where('id','=',$response->uid)->firstOrFail()!=null){
-            return response()->json(['user_status'=>'exists']);
-        } else {
-            // $user = new User;
-            // $user->id=$response->uid;
-            // if($request->has('name')){
-            //     $user->name=$response->name;
-            // }
-            // $user->password = Hash::make($response->password);
-            // return response()->json(['user_status'=>'success']);
-            echo "i am in";
-        }
+        $user = User::all();
+        echo $user;
+        // if(User::where('id','=',$response->uid)->firstOrFail()!=null){
+        //     return response()->json(['user_status'=>'exists']);
+        // } else {
+        //     // $user = new User;
+        //     // $user->id=$response->uid;
+        //     // if($request->has('name')){
+        //     //     $user->name=$response->name;
+        //     // }
+        //     // $user->password = Hash::make($response->password);
+        //     // return response()->json(['user_status'=>'success']);
+        //     echo "i am in";
+        // }
     }
 
     // public function update_user_password(Request $response){
