@@ -72,7 +72,7 @@ class UserController extends Controller
         if(empty($modify_user) or Hash::check($response->password, $modify_user->password)==false ) {
             abort(403);
         } else {
-            return $modify_user.toJson();
+            return $modify_user->toJson();
         }
     }
     
