@@ -43,7 +43,7 @@ class UserController extends Controller
         echo "check";
         $modify_user = User::where('id','=',$response->uid)->first();
         if(empty($modify_user) or Hash::check($response->old_password, $modify_user->password)==false ) {
-            abort(403)
+            abort(403);
         } else {
             $modify_user->password = Hash::make($response->new_password);
             $modify_user->save();
