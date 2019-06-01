@@ -20,7 +20,7 @@ class UserController extends Controller
 
     public function new_user(Request $response){
         // echo $response;
-        $user = User::where('id','=',$response->uid);
+        $user = User::where('id','=',$response->uid)->first();
         echo $user;
         // if(!User::where('id','=',$response->uid)->isEmpty()){
         //     return response()->json(['user_status'=>'exists']);
