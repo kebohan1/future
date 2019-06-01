@@ -37,9 +37,9 @@ class UserController extends Controller
     }
 
     public function update_password(Request $response){
-        if ($response->has('uid') and $response->has('old_password') and $response->has('new_password') ) {
-            echo "quit";
-        }
+        // if ($response->has('uid') and $response->has('old_password') and $response->has('new_password') ) {
+        //     echo "quit";
+        // }
         echo "check";
         // $modify_user = User::where('id','=',$response->uid)->first();
         // if(empty($modify_user) or Hash::check($response->old_password, $modify_user->password)==false ) {
