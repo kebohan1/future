@@ -40,7 +40,6 @@ class UserController extends Controller
         if (!($response->has('uid') and $response->has('old_password') and $response->has('new_password'))) {
             abort(404);
         }
-        echo "check";
         $modify_user = User::where('id','=',$response->uid)->first();
         if(empty($modify_user) or Hash::check($response->old_password, $modify_user->password)==false ) {
             abort(403);
@@ -49,27 +48,20 @@ class UserController extends Controller
             $modify_user->save();
             return response()->json(['user_status'=>'success']);
         }
-
-
-
-
-
-
-        // if(DB::select('select * from users where id = ?',[$response->uid])==null){
-        //     return response()->json(['user_status'=>'error']);
-        // } else {
-        //     DB::update('update users set password = ? where id = ?',[$response->password,$response->uid]);
-        //     return response()->json(['user_status'=>'success']);
-        // }
     }
 
-    // public function update_user_name(Request $response){
-    //     if(DB::select('select * from users where id = ?',[$response->uid])==null){
-    //         return response()->json(['user_status'=>'error']);
-    //     } else {
-    //         DB::update('update users set name = ? where id = ?',[$response->name,$response->uid]);
-    //         return response()->json(['user_status'=>'success']);
-    //     }
-    // }
-    //
+    public function update_user_name(Request $response){
+        if (!($response->has('uid') and $response->has('password') and $response->has('name'))) {
+            abort(404);
+        }
+        $modify_user = User::where('id','=',$response->uid)->first();
+        if(empty($modify_user) or Hash::check($response->password, $modify_user->password)==false ) {
+            abort(403);
+        } else {
+            $modify_user->name = $response->name;
+            $modify_user->save();
+            return response()->json(['user_status'=>'success']);
+        }
+    }
+    
 }
