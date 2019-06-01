@@ -36,7 +36,7 @@ class UserController extends Controller
         }
     }
 
-    public function update_user_password(Request $response){
+    public function update_password(Request $response){
         if ($response->has('uid') and $response->has('old_password') and $response->has('new_password')) {
             abort(404)
         }

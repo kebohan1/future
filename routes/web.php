@@ -18,6 +18,7 @@ $router->get('gps','GPSController@get');
 $router->post('gps','GPSController@writeGPS');
 $router->post('notify/new','NotificationController@new');
 $router->post('user/new','UserController@new_user');
+$router->put('user/update/password','UserController@update_password')
 // $router->get('notify/get','NotificationController@get');
 
 
