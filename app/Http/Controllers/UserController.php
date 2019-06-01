@@ -24,14 +24,13 @@ class UserController extends Controller
         if(!empty(User::where('id','=',$response->uid)->first()) ) {
             return response()->json(['user_status'=>'exists']);
         } else {
-            // $user = new User;
-            // $user->id=$response->uid;
-            // if($request->has('name')){
-            //     $user->name=$response->name;
-            // }
-            // $user->password = Hash::make($response->password);
-            // return response()->json(['user_status'=>'success']);
-            echo "i am in";
+            $user = new User;
+            $user->id=$response->uid;
+            if($request->has('name')){
+                $user->name=$response->name;
+            }
+            $user->password = Hash::make($response->password);
+            return response()->json(['user_status'=>'success']);
         }
     }
 
