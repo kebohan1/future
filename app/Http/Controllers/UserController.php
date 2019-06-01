@@ -63,5 +63,17 @@ class UserController extends Controller
             return response()->json(['user_status'=>'success']);
         }
     }
+
+    public function login(Request $response){
+        if (!($response->has('uid') and $response->has('password'))) {
+            abort(404);
+        }
+        $modify_user = User::where('id','=',$response->uid)->first();
+        if(empty($modify_user) or Hash::check($response->password, $modify_user->password)==false ) {
+            abort(403);
+        } else {
+            return response()->json(['user_status'=>'success']);
+        }
+    }
     
 }
