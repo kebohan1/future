@@ -26,7 +26,7 @@ class UserController extends Controller
         } else {
             $user = new User;
             $user->id=$response->uid;
-            echo $request->has('name');
+            echo $response->has('name');
             // if($request->has('name')){
             //     $user->name=$response->name;
             // }
