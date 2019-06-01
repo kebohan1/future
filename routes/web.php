@@ -20,6 +20,9 @@ $router->post('notify/new','NotificationController@new');
 $router->post('user/new','UserController@new_user');
 $router->put('user/update/password','UserController@update_password');
 $router->put('user/update/name','UserController@update_user_name');
+$router->post('user/login','UserController@login');
+
+
 // $router->get('notify/get','NotificationController@get');
 
 
